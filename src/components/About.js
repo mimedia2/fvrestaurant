@@ -1,11 +1,58 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useAuth } from '../contexts/AuthContext';  // Import AuthContext
+import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
+const LogoutConfirmationModal = ({ show, onClose, onConfirm }) => {
+  if (!show) return null;
+
+  return (
+    <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 z-50">
+      <div className="bg-white rounded-lg p-6 w-80 shadow-lg">
+        <h2 className="text-lg font-bold mb-4">Confirm Logout</h2>
+        <p className="text-gray-600 mb-4">Are you sure you want to log out?</p>
+        <div className="flex justify-between">
+          <button
+            className="bg-red-500 text-white py-2 px-4 rounded"
+            onClick={onConfirm}
+          >
+            Yes, Logout
+          </button>
+          <button
+            className="bg-gray-300 text-gray-700 py-2 px-4 rounded"
+            onClick={onClose}
+          >
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const Profile = () => {
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
+  const { logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogoutClick = () => {
+    setShowLogoutModal(true); // Show the logout confirmation modal
+  };
+
+  const handleLogoutConfirm = () => {
+    logout(); // Perform the logout action
+    navigate('/signin'); // Redirect to sign-in page after logout
+  };
+
+  const handleLogoutCancel = () => {
+    setShowLogoutModal(false); // Close the modal without logging out
+  };
+
   return (
     <div className="bg-gradient-to-r from-purple-200 to-blue-200 min-h-screen">
       {/* Profile Section */}
       <section id="profile-section" className="p-8 mb-16">
+        {/* ... other profile content ... */}
         <div className="bg-gradient-to-r from-purple-600 to-blue-600 p-4 rounded-lg">
           <div className="flex items-center">
             <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center">
@@ -62,7 +109,9 @@ const Profile = () => {
                   clipRule="evenodd"
                 />
               </svg>
+              <Link to='/AddressManager'>
               <span className="px-1">My Address</span>
+              </Link>
             </li>
             <li className="flex items-center p-2 rounded-lg hover:bg-gray-200">
               <svg
@@ -154,6 +203,39 @@ const Profile = () => {
             </li>
           </ul>
         </div>
+
+        {/* Log out section */}
+        <div className="flex justify-center items-center">
+          <button
+            className="flex flex-row font-bold items-center mt-6"
+            onClick={handleLogoutClick}
+          >
+            <div className="bg-red-600 rounded-full p-1">
+              <svg
+                className="text-white w-4 h-4"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M5.636 5.636a9 9 0 1 0 12.728 0M12 3v9"
+                />
+              </svg>
+            </div>
+            <span className="text-gray-800 pl-1">Logout</span>
+          </button>
+        </div>
+
+        {/* Logout confirmation modal */}
+        <LogoutConfirmationModal
+          show={showLogoutModal}
+          onClose={handleLogoutCancel}
+          onConfirm={handleLogoutConfirm}
+        />
       </section>
     </div>
   );

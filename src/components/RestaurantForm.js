@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { LoadScript, GoogleMap} from "@react-google-maps/api";
+import { Link } from 'react-router-dom';
 
 const RestaurantForm = () => {
   const [coordinates, setCoordinates] = useState({
@@ -202,13 +203,10 @@ const RestaurantForm = () => {
             </p>
           </div>
         </div>
-
-        <a
-          href="/addrestaurantaccont.html"
-          className="bg-blue-600 text-white text-lg font-bold w-full my-3 px-4 py-3 rounded-xl text-center block"
-        >
-          NEXT
-        </a>
+        <Link to='/RestaurantAccount' className="bg-blue-600 text-white text-lg font-bold w-full my-3 px-4 py-3 rounded-xl text-center block" >
+        NEXT
+        </Link>
+        
       </form>
     </div>
   );

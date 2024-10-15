@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+// src/components/SignIn.js
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';  // Import AuthContext
 
 const SignInForm = () => {
     const [formData, setFormData] = useState({
@@ -11,7 +13,8 @@ const SignInForm = () => {
 
     const [errorMessage, setErrorMessage] = useState('');
     const [showPassword, setShowPassword] = useState(false);
-    const navigate = useNavigate(); // Initialize the navigate hook
+    const navigate = useNavigate();
+    const { login, currentUser } = useAuth();  // Use login and currentUser from AuthContext
 
     const handleChange = (e) => {
         const { name, value, checked, type } = e.target;
@@ -22,22 +25,15 @@ const SignInForm = () => {
     };
 
     const togglePasswordVisibility = () => {
-        setShowPassword(!showPassword); // Toggle password visibility
+        setShowPassword(!showPassword);
     };
 
     const validateSignInForm = () => {
         const { email, password } = formData;
-
-        if (!email) {
-            setErrorMessage('Please enter your email address.');
+        if (!email || !password) {
+            setErrorMessage('Please enter all fields.');
             return false;
         }
-
-        if (!password) {
-            setErrorMessage('Please enter your password.');
-            return false;
-        }
-
         setErrorMessage('');
         return true;
     };
@@ -54,17 +50,20 @@ const SignInForm = () => {
                     },
                     body: JSON.stringify({
                         email: formData.email,
-                        password: formData.password
-                    })
+                        password: formData.password,
+                    }),
                 });
-
+    
                 const data = await response.json();
-
+    
                 if (response.ok) {
-                    alert('Login successful!');
-                    console.log('User logged in:', data);
-                    localStorage.setItem('token', data.token);  // Store token
-                    navigate('/');  // Redirect to Home page after login
+                    // Store the user ID and token in local storage
+                    localStorage.setItem('userId', data.id);  // Assuming data.id contains user ID
+                    localStorage.setItem('authToken', data.token); // Store token
+    
+                    // Call login function and navigate to the home page
+                    login(data.token);
+                    navigate('/home');
                 } else {
                     setErrorMessage(data.message || 'Login failed. Please try again.');
                 }
@@ -74,6 +73,15 @@ const SignInForm = () => {
             }
         }
     };
+    
+    
+
+    // If already logged in, redirect to home
+    useEffect(() => {
+        if (currentUser) {
+            navigate('/home');
+        }
+    }, [currentUser, navigate]);
 
     return (
         <div className="flex items-center justify-center min-h-screen">
@@ -81,7 +89,6 @@ const SignInForm = () => {
                  <div className="text-center">
                     <img src="./img/foodverselogo.png" alt="Food Verse Logo" className="mx-auto w-32 h-32" />
                  </div>
-                {/* Form Section */}
                 <form id="signinForm" className="space-y-4" onSubmit={handleSubmit}>
                     {/* Email */}
                     <div>
@@ -95,7 +102,7 @@ const SignInForm = () => {
                         />
                     </div>
 
-                    {/* Password with Eye Icon */}
+                    {/* Password */}
                     <div className="relative">
                         <input
                             type={showPassword ? 'text' : 'password'}
@@ -110,40 +117,40 @@ const SignInForm = () => {
                             onClick={togglePasswordVisibility}
                             className="absolute right-3 top-3 cursor-pointer"
                         >
-                            {/* Eye icon here */}
+                            {/* Eye icon */}
                         </span>
                     </div>
 
-                    {/* Remember Me Checkbox */}
+                    {/* Remember Me */}
                     <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-2 pl-2" >
-                           <input
-                              type="checkbox"
-                              name="remember"
-                              checked={formData.remember}
-                              onChange={handleChange}
-                              className="h-4 w-4 text-blue-600 focus:ring-blue-400 border-gray-300 rounded" />
-                           <label className="text-gray-500 text-sm">Remember Me</label>
+                        <div className="flex items-center space-x-2 pl-2">
+                            <input
+                                type="checkbox"
+                                name="remember"
+                                checked={formData.remember}
+                                onChange={handleChange}
+                                className="h-4 w-4 text-blue-600 focus:ring-blue-400 border-gray-300 rounded"
+                            />
+                            <label className="text-gray-500 text-sm">Remember Me</label>
                         </div>
                         <div className='pr-2'>
                             <Link to='#'><p className='text-blue-600'>Forget Password?</p></Link>
-                            
                         </div>
                     </div>
 
-                    {/* Error message display */}
+                    {/* Error Message */}
                     {errorMessage && <div className="text-red-500 text-sm">{errorMessage}</div>}
 
                     {/* Sign In Button */}
                     <div>
-                        <button type="submit" className="w-full bg-gradient-to-r from-purple-600 to-blue-600 text-white py-2 rounded-lg font-bold ">
+                        <button type="submit" className="w-full bg-gradient-to-r from-purple-600 to-blue-600 text-white py-2 rounded-lg font-bold">
                             Sign In
                         </button>
                     </div>
 
                     {/* Sign Up Link */}
                     <div className="text-center text-sm text-gray-500">
-                        Don't have an account? <Link to="/SignUp" className="text-blue-500 underline ">Sign Up</Link>
+                        Don't have an account? <Link to="/" className="text-blue-500 underline">Sign Up</Link>
                     </div>
                 </form>
             </div>
