@@ -1,9 +1,41 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { api_path_url, authToken } from "../secret";
+import Footer from "../Layout/Footer";
 
 const MainProfile = () => {
-    const profile = [
-        { name: 'Ibrahim', img: './img/Ibrahimtest.jpg' },
-    ]
+  const profile = [{ name: "Ibrahim", img: "./img/Ibrahimtest.jpg" }];
+
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const localUser = JSON.parse(localStorage.getItem("user"));
+    
+    async function fetchUserInformation() {
+      try {
+        const apiResponse = await fetch(
+          `${api_path_url}/user/profile-info?id=${localUser.id}`,
+          {
+            headers: {
+              "x-auth-token": authToken,
+            },
+            method: "GET",
+          }
+        );
+
+        const result = await apiResponse.json();
+
+        if (result.success) {
+          setUser(result?.user);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    fetchUserInformation();
+  }, []);
+
   return (
     <div className="bg-gradient-to-r from-purple-500 to-blue-500 flex items-center justify-center min-h-screen p-4">
       <div className="bg-white rounded-3xl shadow-2xl overflow-hidden w-full max-w-sm">
@@ -11,10 +43,10 @@ const MainProfile = () => {
         <div className="bg-gradient-to-r from-purple-600 to-blue-600 py-6 px-6">
           <div className="flex justify-center">
             <div className="relative">
-             <img
-              className="w-24 h-24 rounded-full border-4 border-white shadow-lg"
-              src={process.env.PUBLIC_URL + '/img/Ibrahimtest.jpg'}
-              alt={profile.name}          
+              <img
+                className="w-24 h-24 rounded-full border-4 border-white shadow-lg"
+                src={user?.profileImage}
+                alt={profile.name}
               />
               <div className="absolute bottom-0 right-0 bg-white rounded-full shadow-md">
                 <svg
@@ -35,7 +67,7 @@ const MainProfile = () => {
             </div>
           </div>
           <h2 className="mt-4 text-white text-center text-xl font-bold">
-            Mr. Ibrahim
+            {user?.fullName}
           </h2>
         </div>
 
@@ -82,7 +114,7 @@ const MainProfile = () => {
               </svg>
             </div>
             <span className="text-gray-700 font-semibold">Phone Number</span>
-            <span className="ml-auto text-gray-500">01861113852</span>
+            <span className="ml-auto text-gray-500">{user?.phoneNumber}</span>
           </div>
 
           {/* Email */}
@@ -104,39 +136,24 @@ const MainProfile = () => {
               </svg>
             </div>
             <span className="text-gray-700 font-semibold">Email</span>
-            <span className="ml-auto text-gray-500">info@mimedia.co</span>
+            <span className="ml-auto text-gray-500">{user?.email}</span>
           </div>
 
           {/* Password */}
-          <div className="flex items-center space-x-4 rounded-lg shadow-md p-2">
-            <div className="bg-purple-100 p-2 rounded-full">
-              <svg
-                className="h-6 w-6 text-purple-500"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z"
-                />
-              </svg>
-            </div>
-            <span className="text-gray-700 font-semibold">Password</span>
-            <span className="ml-auto text-gray-500">••••••••</span>
-          </div>
         </div>
 
         {/* Edit Profile Button */}
         <div className="p-6">
-          <button className="w-full bg-gradient-to-r from-purple-600 to-blue-600 text-white font-bold py-3 rounded-full shadow-md hover:from-purple-700 hover:to-blue-700 transition duration-300 ease-in-out">
+          <Link
+            to="/"
+            className="w-full block text-center bg-gradient-to-r from-purple-600 to-blue-600 text-white font-bold py-3 rounded-full shadow-md hover:from-purple-700 hover:to-blue-700 transition duration-300 ease-in-out"
+          >
             See dashboard
-          </button>
+          </Link>
         </div>
       </div>
+
+      <Footer />
     </div>
   );
 };

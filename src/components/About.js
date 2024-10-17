@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
-import { useAuth } from '../contexts/AuthContext';  // Import AuthContext
-import { useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+import { useAuth } from "../contexts/AuthContext"; // Import AuthContext
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import Footer from "../Layout/Footer";
 
 const LogoutConfirmationModal = ({ show, onClose, onConfirm }) => {
   if (!show) return null;
@@ -40,8 +41,9 @@ const Profile = () => {
   };
 
   const handleLogoutConfirm = () => {
-    logout(); // Perform the logout action
-    navigate('/signin'); // Redirect to sign-in page after logout
+    
+    localStorage.removeItem("user");
+    navigate("/signin"); // Redirect to sign-in page after logout
   };
 
   const handleLogoutCancel = () => {
@@ -109,8 +111,8 @@ const Profile = () => {
                   clipRule="evenodd"
                 />
               </svg>
-              <Link to='/AddressManager'>
-              <span className="px-1">My Address</span>
+              <Link to="/AddressManager">
+                <span className="px-1">My Address</span>
               </Link>
             </li>
             <li className="flex items-center p-2 rounded-lg hover:bg-gray-200">
@@ -132,7 +134,9 @@ const Profile = () => {
         </div>
         {/* Promotional Activity */}
         <div className="mt-4 bg-white p-4 rounded-lg shadow-md">
-          <h3 className="text-lg font-bold text-purple-600">Promotional Activity</h3>
+          <h3 className="text-lg font-bold text-purple-600">
+            Promotional Activity
+          </h3>
           <ul className="mt-2 space-y-2">
             <li className="flex items-center p-2 rounded-lg hover:bg-gray-200">
               <svg
@@ -198,7 +202,7 @@ const Profile = () => {
                 />
               </svg>
               <Link to="/RestaurantForm">
-                <span className="px-1" > Add Your Restaurant</span>
+                <span className="px-1"> Add Your Restaurant</span>
               </Link>
             </li>
           </ul>
@@ -237,6 +241,7 @@ const Profile = () => {
           onConfirm={handleLogoutConfirm}
         />
       </section>
+      <Footer />
     </div>
   );
 };
