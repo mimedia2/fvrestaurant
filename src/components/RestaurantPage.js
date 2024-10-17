@@ -1,6 +1,36 @@
-import React from 'react';
+import React, { useEffect, useState } from "react";
+import { api_path_url, authToken } from "../secret";
+import MenuCard from "./MenuCard";
+import Footer from "../Layout/Footer";
 
 const RestaurantPage = () => {
+  const [menu, setMenu] = useState(null);
+
+  useEffect(() => {
+    async function fetchUserInformation() {
+      try {
+        const apiResponse = await fetch(`${api_path_url}/menu`, {
+          headers: {
+            "x-auth-token": authToken,
+          },
+          method: "GET",
+        });
+
+        const result = await apiResponse.json();
+
+        console.log(result);
+
+        if (result.success) {
+          setMenu(result?.menus);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    fetchUserInformation();
+  }, []);
+
   return (
     <div className="p-4 bg-gradient-to-r from-purple-200 to-blue-200">
       {/* Header Section */}
@@ -12,10 +42,13 @@ const RestaurantPage = () => {
             className="w-20 h-16 rounded-md object-cover shadow-md"
           />
           <div className="flex flex-col">
-            <h1 className="text-xl font-bold text-gray-800">Boom Boom Burger</h1>
+            <h1 className="text-xl font-bold text-gray-800">
+              Boom Boom Burger
+            </h1>
             <p className="text-sm text-gray-500">
-              0.2km away |{' '}
-              <span className="text-gray-800 font-medium">Free delivery</span> | Tk 500 Minimum
+              0.2km away |{" "}
+              <span className="text-gray-800 font-medium">Free delivery</span> |
+              Tk 500 Minimum
             </p>
           </div>
         </div>
@@ -44,141 +77,25 @@ const RestaurantPage = () => {
           </div>
           <div className="text-sm text-gray-600">
             <p>
-              Delivery: <span className="font-semibold text-gray-800">10-25 min</span>
+              Delivery:{" "}
+              <span className="font-semibold text-gray-800">10-25 min</span>
             </p>
           </div>
         </div>
       </section>
 
       {/* Popular Items Section */}
-      <section className="mt-6">
+      <section className="mt-6 mb-12">
         <div className="bg-white my-4 p-4 rounded-lg shadow-lg">
           <h2 className="text-xl font-bold text-gray-800">All item</h2>
         </div>
         <div className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-3">
-          {/* Item 1 */}
-          <div className="bg-white rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-1 transition">
-            <img
-              src="img/burger.png"
-              alt="Smokey BBQ Chicken Cheese Burger"
-              className="w-full h-32 sm:h-48 object-cover rounded-md"
-            />
-            <h3 className="text-sm font-semibold text-gray-800 mx-2 mt-2">
-              Smokey BBQ Chicken Cheese Burger
-            </h3>
-            <div className='flex items-center justify-between px-2'>
-              <p className="text-gray-600 mx-2 my-1">Tk 240</p>
-              <div className='flex items-center justify-between'>
-              <svg  xmlns="http://www.w3.org/2000/svg" className='h-5 w-5 text-purple-500 ' viewBox="0 0 24 24" fill="currentColor" >
-              <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z" clip-rule="evenodd" />
-              </svg>
-              <p className='px-2 font-bold text-gray-700 '>4.3</p>
-              </div>
-            </div>
-          </div>
-           {/* Item 1 */}
-           <div className="bg-white rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-1 transition">
-            <img
-              src="img/burger.png"
-              alt="Smokey BBQ Chicken Cheese Burger"
-              className="w-full h-32 sm:h-48 object-cover rounded-md"
-            />
-            <h3 className="text-sm font-semibold text-gray-800 mx-2 mt-2">
-              Smokey BBQ Chicken Cheese Burger
-            </h3>
-            <div className='flex items-center justify-between px-2'>
-              <p className="text-gray-600 mx-2 my-1">Tk 240</p>
-              <div className='flex items-center justify-between'>
-              <svg  xmlns="http://www.w3.org/2000/svg" className='h-5 w-5 text-purple-500 ' viewBox="0 0 24 24" fill="currentColor">
-              <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z" clip-rule="evenodd" />
-              </svg>
-              <p className='px-2 font-bold text-gray-700 '>4.3</p>
-              </div>
-            </div>
-          </div>
-           {/* Item 1 */}
-           <div className="bg-white rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-1 transition">
-            <img
-              src="img/burger.png"
-              alt="Smokey BBQ Chicken Cheese Burger"
-              className="w-full h-32 sm:h-48 object-cover rounded-md"
-            />
-            <h3 className="text-sm font-semibold text-gray-800 mx-2 mt-2">
-              Smokey BBQ Chicken Cheese Burger
-            </h3>
-            <div className='flex items-center justify-between px-2'>
-              <p className="text-gray-600 mx-2 my-1">Tk 240</p>
-              <div className='flex items-center justify-between'>
-              <svg  xmlns="http://www.w3.org/2000/svg" className='h-5 w-5 text-purple-500 ' viewBox="0 0 24 24" fill="currentColor" >
-              <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z" clip-rule="evenodd" />
-              </svg>
-              <p className='px-2 font-bold text-gray-700 '>4.3</p>
-              </div>
-            </div>
-          </div>
-
-           {/* Item 1 */}
-           <div className="bg-white rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-1 transition">
-            <img
-              src="img/burger.png"
-              alt="Smokey BBQ Chicken Cheese Burger"
-              className="w-full h-32 sm:h-48 object-cover rounded-md"
-            />
-            <h3 className="text-sm font-semibold text-gray-800 mx-2 mt-2">
-              Smokey BBQ Chicken Cheese Burger
-            </h3>
-            <div className='flex items-center justify-between px-2'>
-              <p className="text-gray-600 mx-2 my-1">Tk 240</p>
-              <div className='flex items-center justify-between'>
-              <svg  xmlns="http://www.w3.org/2000/svg" className='h-5 w-5 text-purple-500 ' viewBox="0 0 24 24" fill="currentColor" >
-              <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z" clip-rule="evenodd" />
-              </svg>
-              <p className='px-2 font-bold text-gray-700 '>4.3</p>
-              </div>
-            </div>
-          </div>
-           {/* Item 1 */}
-           <div className="bg-white rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-1 transition">
-            <img
-              src="img/burger.png"
-              alt="Smokey BBQ Chicken Cheese Burger"
-              className="w-full h-32 sm:h-48 object-cover rounded-md"
-            />
-            <h3 className="text-sm font-semibold text-gray-800 mx-2 mt-2">
-              Smokey BBQ Chicken Cheese Burger
-            </h3>
-            <div className='flex items-center justify-between px-2'>
-              <p className="text-gray-600 mx-2 my-1">Tk 240</p>
-              <div className='flex items-center justify-between'>
-              <svg  xmlns="http://www.w3.org/2000/svg" className='h-5 w-5 text-purple-500 ' viewBox="0 0 24 24" fill="currentColor" >
-              <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z" clip-rule="evenodd" />
-              </svg>
-              <p className='px-2 font-bold text-gray-700 '>4.3</p>
-              </div>
-            </div>
-          </div>
-           {/* Item 1 */}
-           <div className="bg-white rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-1 transition">
-            <img
-              src="img/burger.png"
-              alt="Smokey BBQ Chicken Cheese Burger"
-              className="w-full h-32 sm:h-48 object-cover rounded-md"
-            />
-            <h3 className="text-sm font-semibold text-gray-800 mx-2 mt-2">
-              Smokey BBQ Chicken Cheese Burger
-            </h3>
-            <div className='flex items-center justify-between px-2'>
-              <p className="text-gray-600 mx-2 my-1">Tk 240</p>
-              <div className='flex items-center justify-between'>
-              <svg  xmlns="http://www.w3.org/2000/svg" className='h-5 w-5 text-purple-500 ' viewBox="0 0 24 24" fill="currentColor" >
-              <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z" clip-rule="evenodd" />
-              </svg>
-              <p className='px-2 font-bold text-gray-700 '>4.3</p>
-              </div>
-            </div>
-          </div>
+          {menu &&
+            menu?.map((item) => <MenuCard detail={item} key={item.name} />)}
         </div>
       </section>
+
+      <Footer />
     </div>
   );
 };

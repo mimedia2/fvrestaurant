@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 function Cart() {
   return (
@@ -41,9 +42,9 @@ function Cart() {
           <p className="text-gray-600 mb-6">Please add items to the menu.</p>
 
           {/* Browse Button */}
-          <button className="bg-gradient-to-r from-purple-600 to-blue-600 text-white font-semibold py-2 px-6 rounded-lg hover:bg-blue-700 transition duration-300 hover:bg-gradient-to-r hover:from-purple-700 hover:to-blue-700">
+          <Link to="/menus" className="bg-gradient-to-r from-purple-600 to-blue-600 text-white font-semibold py-2 px-6 rounded-lg hover:bg-blue-700 transition duration-300 hover:bg-gradient-to-r hover:from-purple-700 hover:to-blue-700">
             Browse
-          </button>
+          </Link>
         </div>
       </main>
 
