@@ -1,62 +1,29 @@
-import React, { useState } from 'react';
-import { Link } from "react-router-dom";
+import React from 'react';
 import Footer from "../Layout/Footer";
 
-function Home() {
-  const cuisines = [
-    { name: "Biryani", img: "./img/biryani.jpg" },
-    { name: "Burger", img: "./img/burgerR.png" },
-    { name: "Pizza", img: "./img/pizza.png" },
-    { name: "Chicken", img: "./img/KPC.jpg" },
-    { name: "Bengali", img: "./img/bangali.jpg" },
-    { name: "Japanese", img: "./img/sandwich.jpg" },
-    { name: "Burger", img: "./img/burgerR.png" },
-    { name: "Burger", img: "./img/burgerR.png" },
-  ];
-
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const ads = [
-    { src: './img/Add1.jpg', alt: 'Ad 1' },
-    { src: './img/Add2.jpg', alt: 'Ad 2' },
-    { src: './img/Add1.jpg', alt: 'Ad 3' },
-    { src: './img/Add2.jpg', alt: 'Ad 4' },
-
-  ];
-
-  const nextSlide = () => {
-    setCurrentIndex((currentIndex + 1) % ads.length);
-  };
-
-  const prevSlide = () => {
-    setCurrentIndex((currentIndex - 1 + ads.length) % ads.length);
-  };
-
+const Home = () => {
   return (
-    <>
-      {/* Header section */}
-      <header className="bg-gradient-to-r from-purple-600 to-blue-600 p-4 pb-8 px-4 flex items-center justify-between">
-        <div className="flex items-center">
-          {/* Location Icon */}
-          <svg
-            className="w-6 h-6 text-white"
-            fill="currentColor"
-            viewBox="0 0 20 20"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              fillRule="evenodd"
-              d="M10 2a6 6 0 00-6 6c0 3.866 6 10 6 10s6-6.134 6-10a6 6 0 00-6-6zm0 8a2 2 0 110-4 2 2 0 010 4z"
-              clipRule="evenodd"
-            ></path>
-          </svg>
-          <div className="ml-2 text-white text-sm">
-            <span className="block">Kamalnagar, Lakshmipur, Bangladesh</span>
+    <div className="p-4 bg-gradient-to-r from-purple-200 to-blue-200">
+      {/* Header Section */}
+      <header className="bg-white p-4 rounded-lg shadow-lg flex items-center justify-between ">
+        <div className="flex items-center space-x-4">
+          <img
+            src="img/burger.png"
+            alt="Boom Boom Burger"
+            className="w-20 h-16 rounded-md object-cover shadow-md"
+          />
+          <div className="flex flex-col">
+            <h1 className="text-xl font-bold text-gray-800">Boom Boom Burger</h1>
+            <p className="text-xs">Lakshmipur, Bangladesh</p>
           </div>
         </div>
-        {/* Notification Icon */}
-        <div>
+      </header>
+
+      {/* Delivery Info Section */}
+      <section className="bg-white mt-4 p-4 rounded-lg shadow-lg">
+        <div className="flex items-center space-x-2">
           <svg
-            className="w-6 h-6 static top-0 text-white"
+            className="h-6 w-6 text-purple-600"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
@@ -66,99 +33,159 @@ function Home() {
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
-              d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0M3.124 7.5A8.969 8.969 0 0 1 5.292 3m13.416 0a8.969 8.969 0 0 1 2.168 4.5"
+              d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z"
             />
           </svg>
-        </div>
-      </header>
-      
-      {/* SearchBar */}
-      <section className="relative">
-        <div className="absolute -top-6 w-full px-4">
-          <Link to="/SearchBar">
-            <input
-              type="text"
-              className="w-full shadow-md rounded-full pl-10 pr-4 py-3 text-blue-600 placeholder-blue-700 bg-white focus:outline-none"
-              placeholder="Are you hungry !!"
-            />
-            <svg
-              className="absolute left-7 top-3 w-5 h-5 text-purple-600"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fillRule="evenodd"
-                d="M10 18a8 8 0 100-16 8 8 0 000 16zm6-8a6 6 0 11-12 0 6 6 0 0112 0z"
-                clipRule="evenodd"
-              ></path>
-              <path
-                fillRule="evenodd"
-                d="M14.293 14.293a1 1 0 011.414 0l2.5 2.5a1 1 0 01-1.414 1.414l-2.5-2.5a1 1 0 010-1.414z"
-                clipRule="evenodd"
-              ></path>
-            </svg>
-          </Link>
+          <span className="text-lg font-semibold text-gray-800">4.7</span>
+          <span className="text-sm text-gray-600">5000+ ratings</span>
         </div>
       </section>
-      
-      {/* Slider section */}
-      <section className="p-3 mt-3">
-        <div className="relative w-full max-w-lg mx-auto mt-6 overflow-hidden rounded-lg shadow-lg ">
-          <div
-            className="flex transition-transform duration-500"
-            style={{ transform: `translateX(-${currentIndex * 100}%)` }}
-          >
-            {ads.map((ad, index) => (
-              <div key={index} className="min-w-full">
-                <img src={ad.src} alt={ad.alt} className="w-full rounded-lg" />
-              </div>
-            ))}
+
+      {/* Items Section */}
+      <section className="mt-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-3">
+          {/* Item 1 */}
+          <div className="bg-white rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-1 transition">
+            <img
+              src="img/burger.png"
+              alt="Smokey BBQ Chicken Cheese Burger"
+              className="w-full h-32 sm:h-48 object-cover rounded-md"
+            />
+            <h3 className="text-sm font-semibold text-gray-800 mx-2 mt-2">
+              Smokey BBQ Chicken Cheese Burger
+            </h3>
+            <p className="text-gray-600 mx-2 my-1">Tk 240</p>
+          </div>
+          {/* Item 2 */}
+          <div className="bg-white rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-1 transition">
+            <img
+              src="img/burger.png"
+              alt="Chicken Sausage Delight Burger"
+              className="w-full h-32 sm:h-48 object-cover rounded-md"
+            />
+            <h3 className="text-sm font-semibold text-gray-800 mx-2 mt-2">
+              Chicken Sausage Delight Burger
+            </h3>
+            <p className="text-gray-600 mx-2 my-1">Tk 269</p>
+          </div>
+          {/* Item 3 */}
+          <div className="bg-white rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-1 transition">
+            <img
+              src="img/burger.png"
+              alt="Double Decker Chicken Burger"
+              className="w-full h-32 sm:h-48 object-cover rounded-md"
+            />
+            <h3 className="text-sm font-semibold text-gray-800 mx-2 mt-2">
+              Double Decker Chicken Burger
+            </h3>
+            <p className="text-gray-600 mx-2 my-1">Tk 329</p>
+          </div>
+          {/* Item 4 */}
+          <div className="bg-white rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-1 transition">
+            <img
+              src="img/burger.png"
+              alt="Chicken Meatbox"
+              className="w-full h-32 sm:h-48 object-cover rounded-md"
+            />
+            <h3 className="text-sm font-semibold text-gray-800 mx-2 mt-2">
+              Chicken Meatbox
+            </h3>
+            <p className="text-gray-600 mx-2 my-1">Tk 268</p>
+          </div>
+          <div className="bg-white rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-1 transition">
+            <img
+              src="img/burger.png"
+              alt="Chicken Meatbox"
+              className="w-full h-32 sm:h-48 object-cover rounded-md"
+            />
+            <h3 className="text-sm font-semibold text-gray-800 mx-2 mt-2">
+              Chicken Meatbox
+            </h3>
+            <p className="text-gray-600 mx-2 my-1">Tk 268</p>
+          </div>
+          <div className="bg-white rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-1 transition">
+            <img
+              src="img/burger.png"
+              alt="Chicken Meatbox"
+              className="w-full h-32 sm:h-48 object-cover rounded-md"
+            />
+            <h3 className="text-sm font-semibold text-gray-800 mx-2 mt-2">
+              Chicken Meatbox
+            </h3>
+            <p className="text-gray-600 mx-2 my-1">Tk 268</p>
+          </div>
+          <div className="bg-white rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-1 transition">
+            <img
+              src="img/burger.png"
+              alt="Chicken Meatbox"
+              className="w-full h-32 sm:h-48 object-cover rounded-md"
+            />
+            <h3 className="text-sm font-semibold text-gray-800 mx-2 mt-2">
+              Chicken Meatbox
+            </h3>
+            <p className="text-gray-600 mx-2 my-1">Tk 268</p>
+          </div>
+          <div className="bg-white rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-1 transition">
+            <img
+              src="img/burger.png"
+              alt="Chicken Meatbox"
+              className="w-full h-32 sm:h-48 object-cover rounded-md"
+            />
+            <h3 className="text-sm font-semibold text-gray-800 mx-2 mt-2">
+              Chicken Meatbox
+            </h3>
+            <p className="text-gray-600 mx-2 my-1">Tk 268</p>
+          </div>
+          <div className="bg-white rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-1 transition">
+            <img
+              src="img/burger.png"
+              alt="Chicken Meatbox"
+              className="w-full h-32 sm:h-48 object-cover rounded-md"
+            />
+            <h3 className="text-sm font-semibold text-gray-800 mx-2 mt-2">
+              Chicken Meatbox
+            </h3>
+            <p className="text-gray-600 mx-2 my-1">Tk 268</p>
+          </div>
+          <div className="bg-white rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-1 transition">
+            <img
+              src="img/burger.png"
+              alt="Chicken Meatbox"
+              className="w-full h-32 sm:h-48 object-cover rounded-md"
+            />
+            <h3 className="text-sm font-semibold text-gray-800 mx-2 mt-2">
+              Chicken Meatbox
+            </h3>
+            <p className="text-gray-600 mx-2 my-1">Tk 268</p>
+          </div>
+          <div className="bg-white rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-1 transition">
+            <img
+              src="img/burger.png"
+              alt="Chicken Meatbox"
+              className="w-full h-32 sm:h-48 object-cover rounded-md"
+            />
+            <h3 className="text-sm font-semibold text-gray-800 mx-2 mt-2">
+              Chicken Meatbox
+            </h3>
+            <p className="text-gray-600 mx-2 my-1">Tk 268</p>
+          </div>
+          <div className="bg-white rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-1 transition">
+            <img
+              src="img/burger.png"
+              alt="Chicken Meatbox"
+              className="w-full h-32 sm:h-48 object-cover rounded-md"
+            />
+            <h3 className="text-sm font-semibold text-gray-800 mx-2 mt-2">
+              Chicken Meatbox
+            </h3>
+            <p className="text-gray-600 mx-2 my-1">Tk 268</p>
           </div>
 
-          <button
-            onClick={prevSlide}
-            className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 hover:bg-opacity-80 text-white p-2 rounded-full"
-          >
-            &#10094;
-          </button>
-
-          <button
-            onClick={nextSlide}
-            className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 hover:bg-opacity-80 text-white p-2 rounded-full"
-          >
-            &#10095;
-          </button>
         </div>
       </section>
-      
-      {/* Popular cuisines */}
-      <section className="p-3 ">
-        <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-semibold text-purple-600">Popular Cuisines</h2>
-          <Link to="" className="text-blue-600 font-semibold hover:underline">
-            See All
-          </Link>
-        </div>
-        <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-6 lg:grid-cols-8 gap-2">
-          {cuisines.map((cuisine, index) => (
-            <div key={index} className="flex flex-col items-center">
-              <img
-                src={cuisine.img}
-                alt={cuisine.name}
-                className="w-14 h-14 sm:w-20 sm:h-20 rounded-full shadow-md object-cover"
-              />
-              <span className="mt-2 text-sm sm:text-base font-medium text-gray-700">
-                {cuisine.name}
-              </span>
-            </div>
-          ))}
-        </div>
-      </section>
-
       <Footer />
-    </>
+    </div>
   );
-}
+};
 
 export default Home;
