@@ -32,10 +32,19 @@ function App() {
         <div className="App">
           <Routes>
             {/* Public Routes */}
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<SignUp />} />
             <Route path="/signin" element={<SignIn />} />
 
             {/* Protected Routes */}
+            <Route
+              path="/Home"
+              element={
+                <>
+                  <PrivateRoute element={Favorites} />
+                  <Footer />{" "}
+                </>
+              }
+            />
             <Route
               path="/favorites"
               element={
@@ -74,7 +83,9 @@ function App() {
                 </>
               }
             />
-            <Route path="/about" element={<PrivateRoute element={About} />} />
+            <Route path="/about" 
+              element={<PrivateRoute element={About} />} 
+            />
             <Route
               path="/profile"
               element={<PrivateRoute element={Profile} />}
