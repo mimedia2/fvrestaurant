@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useAuth } from "../contexts/AuthContext"; // Import AuthContext
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import Footer from "../Layout/Footer";
 
 const LogoutConfirmationModal = ({ show, onClose, onConfirm }) => {
   if (!show) return null;
@@ -77,9 +76,9 @@ const Profile = () => {
             </div>
           </div>
         </div>
-        {/* General */}
+        {/* all activity */}
         <div className="mt-4 bg-white p-4 rounded-lg shadow-md">
-          <h3 className="text-lg font-bold text-purple-600">General</h3>
+          <h3 className="text-lg font-bold text-purple-600">All Activity</h3>
           <ul className="mt-2 space-y-2">
             <li className="flex items-center p-2 rounded-lg hover:bg-gray-200">
               <svg
@@ -105,14 +104,10 @@ const Profile = () => {
                 viewBox="0 0 24 24"
                 fill="currentColor"
               >
-                <path
-                  fillRule="evenodd"
-                  d="M11.54 22.351l.07.04.028.016a.76.76 0 0 0 .723 0l.028-.015.071-.041a16.975 16.975 0 0 0 1.144-.742 19.58 19.58 0 0 0 2.683-2.282c1.944-1.99 3.963-4.98 3.963-8.827a8.25 8.25 0 0 0-16.5 0c0 3.846 2.02 6.837 3.963 8.827a19.58 19.58 0 0 0 2.682 2.282 16.975 16.975 0 0 0 1.145.742ZM12 13.5a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"
-                  clipRule="evenodd"
-                />
+                <path d="M2.273 5.625A4.483 4.483 0 0 1 5.25 4.5h13.5c1.141 0 2.183.425 2.977 1.125A3 3 0 0 0 18.75 3H5.25a3 3 0 0 0-2.977 2.625ZM2.273 8.625A4.483 4.483 0 0 1 5.25 7.5h13.5c1.141 0 2.183.425 2.977 1.125A3 3 0 0 0 18.75 6H5.25a3 3 0 0 0-2.977 2.625ZM5.25 9a3 3 0 0 0-3 3v6a3 3 0 0 0 3 3h13.5a3 3 0 0 0 3-3v-6a3 3 0 0 0-3-3H15a.75.75 0 0 0-.75.75 2.25 2.25 0 0 1-4.5 0A.75.75 0 0 0 9 9H5.25Z" />
               </svg>
-              <Link to="/AddressManager">
-                <span className="px-1">My Address</span>
+              <Link to="/wallet">
+                <span className="px-1">My Wallet</span>
               </Link>
             </li>
             <li className="flex items-center p-2 rounded-lg hover:bg-gray-200">
@@ -130,39 +125,22 @@ const Profile = () => {
               </svg>
               <span className="px-1">Language</span>
             </li>
-          </ul>
-        </div>
-        {/* Promotional Activity */}
-        <div className="mt-4 bg-white p-4 rounded-lg shadow-md">
-          <h3 className="text-lg font-bold text-purple-600">
-            Promotional Activity
-          </h3>
-          <ul className="mt-2 space-y-2">
             <li className="flex items-center p-2 rounded-lg hover:bg-gray-200">
-              <svg
+              <svg 
                 className="w-6 text-slate-600"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M1.5 6.375c0-1.036.84-1.875 1.875-1.875h17.25c1.035 0 1.875.84 1.875 1.875v3.026a.75.75 0 0 1-.375.65 2.249 2.249 0 0 0 0 3.898.75.75 0 0 1 .375.65v3.026c0 1.035-.84 1.875-1.875 1.875H3.375A1.875 1.875 0 0 1 1.5 17.625v-3.026a.75.75 0 0 1 .374-.65 2.249 2.249 0 0 0 0-3.898.75.75 0 0 1-.374-.65V6.375Zm15-1.125a.75.75 0 0 1 .75.75v.75a.75.75 0 0 1-1.5 0V6a.75.75 0 0 1 .75-.75Zm.75 4.5a.75.75 0 0 0-1.5 0v.75a.75.75 0 0 0 1.5 0v-.75Zm-.75 3a.75.75 0 0 1 .75.75v.75a.75.75 0 0 1-1.5 0v-.75a.75.75 0 0 1 .75-.75Zm.75 4.5a.75.75 0 0 0-1.5 0V18a.75.75 0 0 0 1.5 0v-.75ZM6 12a.75.75 0 0 1 .75-.75H12a.75.75 0 0 1 0 1.5H6.75A.75.75 0 0 1 6 12Zm.75 2.25a.75.75 0 0 0 0 1.5h3a.75.75 0 0 0 0-1.5h-3Z"
-                  clipRule="evenodd"
-                />
+                xmlns="http://www.w3.org/2000/svg" 
+                fill="none" 
+                viewBox="0 0 24 24" 
+                stroke-width="1.5" 
+                stroke="currentColor" 
+                >
+                 <path 
+                   stroke-linecap="round" 
+                   stroke-linejoin="round" 
+                   d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 0 1 .865-.501 48.172 48.172 0 0 0 3.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z" />
               </svg>
-              <span className="px-1">Vouchers</span>
-            </li>
-            <li className="flex items-center p-2 rounded-lg hover:bg-gray-200">
-              <svg
-                className="w-6 text-slate-600"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-              >
-                <path d="M2.273 5.625A4.483 4.483 0 0 1 5.25 4.5h13.5c1.141 0 2.183.425 2.977 1.125A3 3 0 0 0 18.75 3H5.25a3 3 0 0 0-2.977 2.625ZM2.273 8.625A4.483 4.483 0 0 1 5.25 7.5h13.5c1.141 0 2.183.425 2.977 1.125A3 3 0 0 0 18.75 6H5.25a3 3 0 0 0-2.977 2.625ZM5.25 9a3 3 0 0 0-3 3v6a3 3 0 0 0 3 3h13.5a3 3 0 0 0 3-3v-6a3 3 0 0 0-3-3H15a.75.75 0 0 0-.75.75 2.25 2.25 0 0 1-4.5 0A.75.75 0 0 0 9 9H5.25Z" />
-              </svg>
-              <span className="px-1">My Wallet</span>
+
+              <span className="px-1">Live Support</span>
             </li>
           </ul>
         </div>
@@ -179,7 +157,7 @@ const Profile = () => {
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
-                strokeWidth="1.5"
+                strokeWidth={1.5}
                 stroke="currentColor"
               >
                 <path
@@ -200,7 +178,7 @@ const Profile = () => {
           onConfirm={handleLogoutConfirm}
         />
       </section>
-      <Footer />
+
     </div>
   );
 };

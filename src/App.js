@@ -11,10 +11,9 @@ import SignIn from "./components/SignIn";
 import { AuthProvider } from "./contexts/AuthContext";
 import PrivateRoute from "./components/PrivateRoute";
 import Footer from "./Layout/Footer";
-import SearchBar from "./components/SearchBar";
 import LiveChat from "./components/LiveChat";
-import DeliverymanRegistration from "./components/DeliverymanRegistration";
 import AddressManager from "./components/AddressManager";
+import Wallet from "./components/Wallet";
 import "./App.css";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
@@ -69,20 +68,16 @@ function App() {
               element={<PrivateRoute element={Profile} />}
             />
             <Route
-              path="/searchbar"
-              element={<PrivateRoute element={SearchBar} />}
-            />
-            <Route
               path="/liveChat"
               element={<PrivateRoute element={LiveChat} />}
             />
             <Route
-              path="/deliverymanRegistration"
-              element={<PrivateRoute element={DeliverymanRegistration} />}
-            />
-            <Route
               path="/addressmanager"
               element={<PrivateRoute element={AddressManager} />}
+            />
+            <Route
+              path="/wallet"
+              element={<PrivateRoute element={Wallet} />}
             />
           </Routes>
         </div>
