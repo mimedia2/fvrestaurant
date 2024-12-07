@@ -115,6 +115,7 @@ const AddressManager = () => {
     }
   }, [showAddressForm]);
 
+
   const renderIcon = (label) => {
     switch (label) {
       case "Home":
@@ -274,7 +275,7 @@ const AddressManager = () => {
               <GoogleMap
                 id="map"
                 mapContainerStyle={mapStyles}
-                center={{ lat: newAddress.lat, lng: newAddress.lng }}
+                center={{ lat: 22.944039, lng: 90.833783 }}
                 zoom={16}
                 onLoad={onMapLoad}
                 onIdle={handleMapIdle}

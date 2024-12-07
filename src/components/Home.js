@@ -82,7 +82,6 @@ const Home = () => {
             {/* Repeat more items as needed */}
           </div>
         </section>
-
         <Footer />
       </div>
     </div>
